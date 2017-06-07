@@ -5,9 +5,9 @@
 const vision = require('@google-cloud/vision')({
   projectId: 'tweet-bot-1',
   credentials: {
-        private_key: process.env.PRIVATE_KEY,
-        client_email: process.env.CLIENT_EMAIL
-    }
+    private_key: process.env.PRIVATE_KEY,
+    client_email: process.env.CLIENT_EMAIL
+  }
 });
 const promisify = require('es6-promisify');
 
