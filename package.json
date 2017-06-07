@@ -1,0 +1,20 @@
+{
+  "name": "twitter-vision-bot",
+  "version": "0.1.0",
+  "description": "Bot with 2 talents: Identifying what is in an image, and pixelating faces in an image. Not great talents.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/vision": "^0.8.0",
+    "dotenv": "^4.0.0",
+    "es6-promisify": "5.0.0",
+    "jimp": "^0.2.28",
+    "truncate": "^2.0.0",
+    "twit": "^2.2.5"
+  }
+}
