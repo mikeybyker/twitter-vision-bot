@@ -1,7 +1,19 @@
 {
   "name": "twitter-vision-bot",
   "version": "0.1.0",
-  "description": "Bot with 2 talents: Identifying what is in an image, and pixelating faces in an image. Not great talents.",
+  "description": "Twitter Bot with 2 talents: Identifying what is in an image, and pixelating faces in an image. Not great talents.",
+  "author": "mikeybyker+github@gmail.com",
+  "keywords": [
+    "node",
+    "twitter",
+    "bot",
+    "google-vision-api",
+    "vision"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mikeybyker/twitter-vision-bot.git"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

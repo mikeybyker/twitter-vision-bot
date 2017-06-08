@@ -1,6 +1,6 @@
 # Twitter Vision Bot
 
-A twitter bot that uses the Google Vision API to understand the content of an image. Machine learning in bot form. Not a useful bot, it has to be said.
+A Twitter bot that uses the Google Vision API to understand the content of an image. Machine learning in bot form. Not a useful bot, it has to be said.
 There's 2 different functions of this bot; identification of what the image is of, and face detection.
 
 ### Identify Bot
