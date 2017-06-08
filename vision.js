@@ -29,9 +29,7 @@ const vision = require('@google-cloud/vision')({
   credentials: JSON.parse(process.env.VISION_KEYFILE_JSON),
   VISION_KEYFILE_JSON: JSON.parse(process.env.VISION_KEYFILE_JSON)
 });*/
-// const v = process.env.VISION_KEYFILE_JSON;
-const o = JSON.parse(v);
-// console.log(o);
+const o = JSON.parse(process.env.VISION_KEYFILE_JSON);
 console.log('NEW o.client_email : ', o.client_email); // OK - can see this! 
 // Could not load the default credentials
 // So need to specify somewhere...
