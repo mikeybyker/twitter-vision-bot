@@ -10,10 +10,14 @@
   }
 });*/
 // https://stackoverflow.com/questions/42937145/google-vision-api-authentication-on-heroku
+// const vision = require('@google-cloud/vision')({
+//   projectId: 'tweet-bot-1',
+//   credentials: process.env.VISION_KEYFILE_JSON,
+//   VISION_KEYFILE_JSON: process.env.VISION_KEYFILE_JSON
+// });
+
 const vision = require('@google-cloud/vision')({
-  projectId: 'tweet-bot-1',
-  credentials: process.env.VISION_KEYFILE_JSON,
-  VISION_KEYFILE_JSON: process.env.VISION_KEYFILE_JSON
+  projectId: 'tweet-bot-1'
 });
 const promisify = require('es6-promisify');
 
