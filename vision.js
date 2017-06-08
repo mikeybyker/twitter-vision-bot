@@ -2,12 +2,16 @@
   projectId: 'tweet-bot-1',
   keyFilename: './keyfile.json'
 });*/
-const vision = require('@google-cloud/vision')({
+/*const vision = require('@google-cloud/vision')({
   projectId: 'tweet-bot-1',
   credentials: {
     private_key: process.env.PRIVATE_KEY,
     client_email: process.env.CLIENT_EMAIL
   }
+});*/
+// https://stackoverflow.com/questions/42937145/google-vision-api-authentication-on-heroku
+const vision = require('@google-cloud/vision')({
+  projectId: 'tweet-bot-1'
 });
 const promisify = require('es6-promisify');
 
