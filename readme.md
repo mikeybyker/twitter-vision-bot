@@ -21,64 +21,68 @@ I'd suggest monitoring a user as Twitter does not like bots to go all rampant on
 ### Live
 Monitoring [@b_o_t_1](https://twitter.com/b_o_t_1). Send it a picture of a face. It is only doing the pixelate trick at the moment. Being a bot is tiring work.
 
-## Run
+## Run Locally
 ```javascript
 node index.js
 ```
-
+## Requirements &amp; Setup
 ### Twitter Apps
 Create an app at https://apps.twitter.com/
 Go to **Keys and Access Tokens**
-You want:
+Note down:
  - Consumer Key (API Key)
  - Consumer Secret (API Secret)
  - Access Token
  - Access Token Secret
  
 Copy to the file **.env.sample**, renaming it to **.env**
+Double check .env is in .gitignore - you never want these keys in your repo.
 
 ### Google Vision API
-https://cloud.google.com/vision/docs/before-you-begin
+
+[Before You Begin](https://cloud.google.com/vision/docs/before-you-begin)
 
 Create a new project or select an existing one at [Google Developers Console](https://console.cloud.google.com)
 In the **API Manager**:
   - Turn on the **Google Cloud Vision API**
   - Go to **Credentials** and create a new Service Account. Create and download a json key to authenticate your bot to Google. Keep it **really** safe, really private! Do not add it to github. Ever.
 
-This key is needed to authenticate your bot to Google. The usual way to use is to have this json keyfil on the server, and provide a path to it:
-
+The usual way to use the json keyfile is to provide a path to this file:
 
 ```javascript
-// DO NOT DO
 const vision = require('@google-cloud/vision')({
-  projectId: 'tweet-bot-1',
+  projectId: 'your-bot',
   keyFilename: '/path/to/keyfile.json'
 });
 ```
+However, for the live version - at least when dealing with 3rd party servers like Heroku - that would mean adding the keyfile to the git repo and pushing to the server. Again - very bad.
 
-However, that means (in the case of Heroku and any server you do not control...) putting the keyfil in your git repo and uploading with the rest of the app. This is very bad.
+The alternative way (which was a nightmare to figure out, thanks docs :-|) is instead to add another environment variable to **.env**. Name it **VISION_KEYFILE_JSON** and set the value to the contents of your keyfile.json. Remove whitespace, paste it in, with no surrounding quotes.
 
-The workaround, which took me so long I wanted to cry, is instead to add another environment variable named
-
-
-VISION_KEYFILE_JSON
-
-with the value set to the contents of your keyfile.json. Literally copy paste as is, no surrounding quotes.
-eg.
 ```javascript
-{
-  "type": "service_account",
-  "project_id": "YOUR_PROJECT_ID",
-  "private_key_id": "1234567890",
-  "private_key": "-----BEGIN PRIVATE KEY-----\n1234567890\n-----END PRIVATE KEY-----\n",
-  "client_email": "abc@YOUR_PROJECT_ID.iam.gserviceaccount.com",
-  "client_id": "1234567890",
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://accounts.google.com/o/oauth2/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/etc"
-}
+CONSUMER_KEY=ABC123
+CONSUMER_SECRET=DEF456
+ACCESS_TOKEN=123ABC
+ACCESS_TOKEN_SECRET=456DEF
+VISION_KEYFILE_JSON={"type":"service_account","project_id":"your-bot","and_all":"the_rest_form_keyfile"}
 ```
 
+You can then init google-cloud/vision with:
 
+```javascript
+let credentials;
+try {
+  credentials = JSON.parse(process.env.VISION_KEYFILE_JSON);
+} catch(error) {
+  throw error;
+}
 
+const vision = require('@google-cloud/vision')({
+  projectId: 'your-bot',
+  credentials
+});
+```
+
+For the live version, remember to add all 5 environment variables. In Heroku, do that under **Settings > Config vars**.
+
+You also want the bot running as a worker, not a web app. For Heroku: Add a Procfile, go to Resources and turn on that worker, and off the web app.
