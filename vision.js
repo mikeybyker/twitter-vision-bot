@@ -22,7 +22,7 @@
 // Which is it: credentials or VISION_KEYFILE_JSON?
 const vision = require('@google-cloud/vision')({
   projectId: 'tweet-bot-1',
-  VISION_KEYFILE_JSON: JSON.parse(process.env.VISION_KEYFILE_JSON)
+  credentials: JSON.parse(process.env.VISION_KEYFILE_JSON)
 });
 /*const vision = require('@google-cloud/vision')({
   projectId: 'tweet-bot-1',
